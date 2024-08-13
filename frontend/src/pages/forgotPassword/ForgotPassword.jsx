@@ -9,8 +9,10 @@ import { InputOtp } from 'primereact/inputotp';
 
 
 const ForgotPassword = () => {
-    const [token, setTokens] = useState();
+    const [token, setTokens] = useState('');
     const [visible, setVisible] = useState(false);
+    
+    const isTokenValid = token.length > 0;
     const buttons = (
         <>
             <Button label="Recuperar senha" severity="warning" onClick={() => setVisible(true)} />
@@ -32,7 +34,7 @@ const ForgotPassword = () => {
                             Insira o código no campo abaixo para ser redirecionado à página de alteração de senha.
                         </p>
                         <InputOtp value={token} onChange={(e) => setTokens(e.value)} integerOnly />
-                        <Button label="Verificar" className="p-mt-2"/>
+                        <Button label="Verificar" className="p-mt-2" disabled={!isTokenValid}/>
                     </div>
                 </Dialog>
             </Card>
