@@ -14,12 +14,14 @@ const Login = () => {
             <Button label="Cadastrar" severity='help' style={{ marginLeft: '0.5em' }}/>
         </>
     )
+    const header = (
+        <img alt="Logo" src="frontend\src\components\images\vinatgeCar.png" />
+    )
 
     return (
         <div className="login-container">
-            <h1>Login</h1>
             <Link to="/">Home</Link>
-            <Card title="Login" footer={buttons} className=" flex flex-colum">
+            <Card title="Login" header={header} footer={buttons}>
                 <InputText placeholder="Usuário" />
                 <Password  toggleMask/>
                 <Link to="/forgot-password" className="forgot-password-link">
