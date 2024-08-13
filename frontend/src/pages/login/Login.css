@@ -7,12 +7,24 @@
     background-color: #f0f0f0;
 }
 
-.login-container h1 {
-    color: #333;
-    font-size: 2.5rem;
+.p-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
 }
 
-.login-container p {
-    color: #666;
-    font-size: 1.2rem;
+.p-card .p-inputtext,
+.p-card {
+    margin-bottom: 1rem;
+}
+
+.forgot-password-link {
+    margin-top: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
 }
