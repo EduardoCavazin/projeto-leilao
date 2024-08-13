@@ -20,8 +20,8 @@ const Login = () => {
         <div className="login-container">
             <Link to="/">Home</Link>
             <Card title="Login" footer={buttons}>
-                <InputText placeholder="Usuário" />
-                <Password  toggleMask/>
+                <InputText placeholder="Usuário"/>
+                <Password  toggleMask feedback={false}/>
                 <Link to="/forgot-password" className="forgot-password-link">
                     Esqueceu a senha?
                 </Link>
