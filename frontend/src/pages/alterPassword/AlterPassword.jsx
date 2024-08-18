@@ -29,7 +29,6 @@ function AlterPassword() {
 
     const isPasswordValid = Object.values(passwordValidation).every(Boolean) && newPassword === confirmPassword;
 
-    const header = <div className="font-bold mb-3">Escolha uma senha</div>;
     const footer = (
         <>
             <Divider />
@@ -56,7 +55,6 @@ function AlterPassword() {
                     placeholder="Nova Senha"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    header={header}
                     footer={footer}
                     toggleMask
                 />

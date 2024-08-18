@@ -12,7 +12,9 @@ const Login = () => {
     const buttons = (
         <>
             <Button label="Entrar"/>
-            <Button label="Cadastrar" severity='help' style={{ marginLeft: '0.5em' }}/>
+            <Link to="/register">
+                <Button label="Cadastrar" severity='help' style={{ marginLeft: '0.5em' }}/>
+            </Link>
         </>
     )
 
