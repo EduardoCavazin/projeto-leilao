@@ -9,20 +9,20 @@ import { Button } from 'primereact/button';
 
 
 const Login = () => {
-    const [usuario, setUsuario] = useState({ email: '', password: '' });
+    const [user, setUser] = useState({ email: '', password: '' });
     const navigate = useNavigate();
 
     const handleChange = (input) => {
-        setUsuario({ ...usuario, [input.target.name]: input.target.value });
+        setUser({ ...user, [input.target.name]: input.target.value });
     }
 
     const login = () => {
         //Chamada do back-end para verificar credenciais
-        if (usuario.email === 'eduardo@eduardo' || usuario.password === '123456') {
+        if (user.email === 'eduardo@eduardo' || user.password === '123456') {
             var token = 'token p/ backend';
             localStorage.setItem("token", token);
-            localStorage.setItem("usuario", usuario.email);
-            console.log(usuario);
+            localStorage.setItem("usuario", user.email);
+            console.log(user);
             navigate('/');
         }else{
             alert("Usuário ou senha inválidos");
