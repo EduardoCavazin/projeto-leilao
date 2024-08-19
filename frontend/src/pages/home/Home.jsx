@@ -1,13 +1,14 @@
 import React from 'react';
 import './Home.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 
 const Home = () => {
+    const navigation = useNavigate();
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('usuario');
-        window.location.href = '/login';
+        navigation('/login');
     }
     
     return (
