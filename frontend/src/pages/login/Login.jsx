@@ -40,7 +40,6 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <Link to="/">Home</Link>
             <Card title="Login" footer={buttons}>
                 <InputText placeholder="Email" onChange={handleChange} name='email' id="email" />
                 <Password toggleMask feedback={false} onChange={handleChange} name="password" id="password" />
