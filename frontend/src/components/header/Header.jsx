@@ -4,12 +4,14 @@ import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from "react-router-dom";
 import { OverlayPanel } from 'primereact/overlaypanel';
-import Logout from '../../components/logout/Logout';
+import Logout from '../config/logout/Logout';
+import { Button } from "primereact/button";
 
 
 const Header = () => {
     const navigate = useNavigate();
     const op = useRef(null);
+    const userName = localStorage.getItem('userEmail');
 
     const handleClick = (event) => {
         op.current.toggle(event);
@@ -17,18 +19,24 @@ const Header = () => {
 
     const items = [
         {
+            key : 'home',
             label: 'Home',
             icon: 'pi pi-home',
-            onClick: () => navigate('/')
+            command: () => {
+                console.log('Home');
+                navigate('/');
+            }
         },
         {
+            key : 'profile',
             label: 'Contact',
             icon: 'pi pi-envelope'
+            
         }
     ];
 
     const end = [
-        <Avatar icon="pi pi-user" shape="circle" onClick={handleClick} />,
+        <Avatar key='user-icon' icon="pi pi-user" shape="circle" onClick={handleClick} />,
     ];
 
     return (
@@ -36,7 +44,8 @@ const Header = () => {
             <Menubar model={items} end={end} />
             <OverlayPanel ref={op} style={{ width: '300px' }}>
                 <div className="user-info">
-                    <p>Usuário</p>
+                    <p>{userName}</p>
+                    <Button label="Perfil" onClick={() => navigate('/profile')} />
                     <Logout />
                 </div>
             </OverlayPanel>

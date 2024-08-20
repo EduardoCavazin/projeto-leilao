@@ -21,7 +21,7 @@ const Login = () => {
         if (user.email === 'eduardo@eduardo' || user.password === '123456') {
             var token = 'token p/ backend';
             localStorage.setItem("token", token);
-            localStorage.setItem("usuario", user.email);
+            localStorage.setItem("userEmail", user.email);
             console.log(user);
             navigate('/');
         }else{

@@ -8,6 +8,7 @@ import ForgotPassword from './pages/forgotPassword/ForgotPassword';
 import AlterPassword from './pages/alterPassword/AlterPassword';
 import Register from './pages/register/Register';
 import PrivateRouter from './components/PrivateRouter';
+import Profile from './pages/profile/Profile';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route element={<PrivateRouter />}>
             <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
+            <Route path="/profile" element={<DefaultLayout><Profile /></DefaultLayout>} />
             {/* Inserir outras páginas de acesso restrito */}
           </Route>
           <Route path='/login' element={<SimpleLayout><Login /></SimpleLayout>} />
