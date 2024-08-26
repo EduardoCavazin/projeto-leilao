@@ -45,7 +45,7 @@ const Header = () => {
             <OverlayPanel ref={op} style={{ width: '300px' }}>
                 <div className="user-info">
                     <p>{userName}</p>
-                    <Button label="Perfil" onClick={() => navigate('/profile')} />
+                    <Button label="Perfil" onClick={() => navigate('/profile')} size="small" />
                     <Logout />
                 </div>
             </OverlayPanel>

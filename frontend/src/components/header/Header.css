@@ -8,3 +8,8 @@
 .p-menubar{
     background-color: #dfdfdf;
 }
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+}

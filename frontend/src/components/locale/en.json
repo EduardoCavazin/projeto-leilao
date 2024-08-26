@@ -1,0 +1,13 @@
+{
+    "welcome":"Welcome",
+    "home":"Home",
+    "about":"About",
+    "contact":"Contact",
+    "login":"Login",
+    "logout":"Logout",
+    "register":"Register",
+    "profile":"Profile",
+    "settings":"Settings",
+    "password":"Password",
+    "email":"E-mail"
+}
