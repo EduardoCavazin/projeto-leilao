@@ -5,9 +5,13 @@
     "contact":"Contato",
     "login":"Acessar",
     "logout":"Sair",
-    "register":"Registrar",
+    "register":"Cadastrar",
     "profile":"Perfil",
     "settings":"Configurações",
     "password":"Senha",
-    "email":"E-mail"
+    "email":"E-mail",
+    "button": {
+        "login":"Acessar",
+        "register":"Cadastrar"
+    }
 }

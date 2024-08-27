@@ -9,5 +9,9 @@
     "profile":"Profile",
     "settings":"Settings",
     "password":"Password",
-    "email":"E-mail"
+    "email":"E-mail",
+    "button":{
+        "login":"Login",
+        "register":"Register"
+    }
 }
