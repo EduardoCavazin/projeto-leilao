@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css';
+import style from './Home.module.css';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'primereact/button';
 
@@ -11,11 +11,11 @@ const Home = () => {
     };
 
     return (
-        <div className="home-container">
+        <div className={style.homeContainer}>
             <h1>{t('welcome')} Amiguinho</h1>
             <p>Você está na HomePage</p>
-            <Button label="English" onClick={() => changeLanguage('en')} />
-            <Button label="Português" onClick={() => changeLanguage('pt')} />
+            <Button label="English" className={style.button} onClick={() => changeLanguage('en')} />
+            <Button label="Português" className={style.button} onClick={() => changeLanguage('pt')} />
         </div>
     );
 };

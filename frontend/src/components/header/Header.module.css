@@ -5,11 +5,11 @@
     background-color: #dfdfdf;
 }
 
-.p-menubar{
+.pMenubar{
     background-color: #dfdfdf;
 }
 
-.user-info{
+.userInfo{
     display: flex;
     flex-direction: column;
 }

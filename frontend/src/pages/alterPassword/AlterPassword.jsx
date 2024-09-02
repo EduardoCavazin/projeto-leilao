@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AlterPassword.css";
+import style from "./AlterPassword.module.css";
 import { Card } from "primereact/card";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
@@ -34,11 +34,11 @@ function AlterPassword() {
             <Divider />
             <p className="mt-2">Requisitos</p>
             <ul className="pl-2 ml-2 mt-0 line-height-3">
-                <li className={passwordValidation.lowerCase ? "valid" : "invalid"}>Pelo menos uma letra minúscula</li>
-                <li className={passwordValidation.upperCase ? "valid" : "invalid"}>Pelo menos uma letra maiúscula</li>
-                <li className={passwordValidation.number ? "valid" : "invalid"}>Pelo menos um número</li>
-                <li className={passwordValidation.specialChar ? "valid" : "invalid"}>Pelo menos um caractere especial</li>
-                <li className={passwordValidation.minLength ? "valid" : "invalid"}>Mínimo de 6 caracteres</li>
+                <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>Pelo menos uma letra minúscula</li>
+                <li className={passwordValidation.upperCase ? style.valid : style.invalid}>Pelo menos uma letra maiúscula</li>
+                <li className={passwordValidation.number ? style.valid : style.invalid}>Pelo menos um número</li>
+                <li className={passwordValidation.specialChar ? style.valid : style.invalid}>Pelo menos um caractere especial</li>
+                <li className={passwordValidation.minLength ? style.valid : style.invalid}>Mínimo de 6 caracteres</li>
             </ul>
         </>
     );
@@ -49,7 +49,7 @@ function AlterPassword() {
     };
 
     return (
-        <div className="alterPass-container">
+        <div className={style.alterPassContent}>
             <Card title="Alterar Senha">
                 <Password
                     placeholder="Nova Senha"

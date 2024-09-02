@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./Header.css";
+import style from "./Header.module.css";
 import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from "react-router-dom";
@@ -40,10 +40,10 @@ const Header = () => {
     ];
 
     return (
-        <div className="header">
-            <Menubar model={items} end={end} />
+        <div className={style.header}>
+            <Menubar model={items} end={end} className={style.pMenubar} />
             <OverlayPanel ref={op} style={{ width: '300px' }}>
-                <div className="user-info">
+                <div className={style.userInfo}>
                     <p>{userName}</p>
                     <Button label="Perfil" onClick={() => navigate('/profile')} size="small" />
                     <Logout />

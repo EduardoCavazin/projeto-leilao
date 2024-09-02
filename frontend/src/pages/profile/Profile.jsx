@@ -1,9 +1,9 @@
 import React from "react";
-import "./Profile.css";
+import style from "./Profile.module.css";
 
 const Profile = () => {
     return (
-        <div className="profile-container">
+        <div className={style.profileContainer}>
             <h1>Profile</h1>
             <p>Profile Page</p>
         </div>

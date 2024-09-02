@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ForgotPassword.css";
+import style from"./ForgotPassword.module.css";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -19,14 +19,14 @@ const ForgotPassword = () => {
     )
 
     return (
-        <div className="forgotPass-container">
-            <Card title="Recuperar senha" footer={buttons}>
+        <div className={style.forgotPassContainer}>
+            <Card title="Recuperar senha" footer={buttons} className={style.cardContent}>
                 <p>
                     Insira o e-mail cadastrado para recuperar a senha.
                 </p>
                 <InputText placeholder="E-mail" />
-                <Dialog header="Aviso" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false); }}>
-                    <div className="dialog-content">
+                <Dialog header="Aviso" visible={visible} style={{ width: '50vw' }} onHide={() => { if (!visible) return; setVisible(false);}}>
+                    <div className={style.dialogContent}>
                         <p className="m-0">
                             Foi enviado um e-mail para sua conta contendo um códio de verificação.
                             Insira o código no campo abaixo para ser redirecionado à página de alteração de senha.
