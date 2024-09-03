@@ -1,4 +1,4 @@
-.home-container {
+.homeContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,12 +7,16 @@
     background-color: #f0f0f0;
 }
 
-.home-container h1 {
+.homeContainer h1 {
     color: #333;
     font-size: 2.5rem;
 }
 
-.home-container p {
+.homeContainer p {
     color: #666;
     font-size: 1.2rem;
+}
+
+.button{
+    margin: 20px;
 }

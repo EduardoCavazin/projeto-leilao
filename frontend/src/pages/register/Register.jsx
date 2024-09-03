@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import './Register.css';
+import style from './Register.module.css';
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { InputMask } from 'primereact/inputmask';
 import { Divider } from "primereact/divider";
+import { useTranslation } from "react-i18next";
 
 function Register() {
+    const { t } = useTranslation();
     const [completeName, setCompleteName] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -73,75 +75,80 @@ function Register() {
     const passFooter = (
         <>
             <Divider />
-            <p className="mt-2">Requisitos</p>
+            <p className="mt-2">{t('requirements')}</p>
             <ul className="pl-2 ml-2 mt-0 line-height-3">
-                <li className={passwordValidation.lowerCase ? "valid" : "invalid"}>Pelo menos uma letra minúscula</li>
-                <li className={passwordValidation.upperCase ? "valid" : "invalid"}>Pelo menos uma letra maiúscula</li>
-                <li className={passwordValidation.number ? "valid" : "invalid"}>Pelo menos um número</li>
-                <li className={passwordValidation.specialChar ? "valid" : "invalid"}>Pelo menos um caractere especial</li>
-                <li className={passwordValidation.minLength ? "valid" : "invalid"}>Mínimo de 6 caracteres</li>
+            <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>{t('lowerCase')}</li>
+                <li className={passwordValidation.upperCase ? style.valid : style.invalid}>{t('upperCase')}</li>
+                <li className={passwordValidation.number ? style.valid : style.invalid}>{t('number')}</li>
+                <li className={passwordValidation.specialChar ? style.valid : style.invalid}>{t('specialChar')}</li>
+                <li className={passwordValidation.minLength ? style.valid : style.invalid}>{t('minLength')}</li>
             </ul>
         </>
     );
 
     return (
-        <div className="register-container">
-            <Card title="Cadastro">
+        <div className={style.registerContainer}>
+            <Card title="Cadastro" className={style.cardContent}>
                 <InputText
-                    placeholder="Nome"
+                    placeholder={t('name')}
                     value={completeName}
                     onChange={(e) => setCompleteName(e.target.value)}
                     onBlur={() => handleBlur('completeName')}
-                    className={touchedFields.completeName && !isFieldValid(completeName) ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.completeName && !isFieldValid(completeName) ? 'p-invalid' : ''}`}
                 />
                 <InputText
-                    placeholder="E-mail"
+                    placeholder={t('email')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onBlur={() => handleBlur('email')}
-                    className={touchedFields.email && !isFieldValid(email) ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.email && !isFieldValid(email) ? 'p-invalid' : ''}`}
                 />
                 <InputMask
                     mask="999.999.999-99"
-                    placeholder="CPF"
+                    placeholder={t('cpf')}
                     value={cpf}
                     onChange={(e) => setCpf(e.target.value)}
                     onBlur={() => handleBlur('cpf')}
-                    className={touchedFields.cpf && !isFieldValid(cpf) ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.cpf && !isFieldValid(cpf) ? 'p-invalid' : ''}`}
                 />
                 <InputMask
                     mask="(99) 99999-9999"
-                    placeholder="Telefone"
+                    placeholder={t('phone')}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     onBlur={() => handleBlur('phone')}
-                    className={touchedFields.phone && !isFieldValid(phone) ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.phone && !isFieldValid(phone) ? 'p-invalid' : ''}`}
                 />
                 <InputText
-                    placeholder="Usuário"
+                    placeholder={t('user')}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     onBlur={() => handleBlur('username')}
-                    className={touchedFields.username && !isFieldValid(username) ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.username && !isFieldValid(username) ? 'p-invalid' : ''}`}
                 />
                 <Password
-                    placeholder="Nova Senha"
+                    placeholder={t('password')}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     onBlur={() => handleBlur('password')}
                     footer={passFooter}
                     toggleMask
+                    className={style['input-field']}
                 />
                 <Password
-                    placeholder="Confirmar Nova Senha"
+                    placeholder={t('confirmPassword')}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     onBlur={() => handleBlur('confirmPassword')}
                     toggleMask
                     feedback={false}
-                    className={touchedFields.confirmPassword && newPassword !== confirmPassword ? 'p-invalid' : ''}
+                    className={`${style['input-field']} ${touchedFields.confirmPassword && newPassword !== confirmPassword ? 'p-invalid' : ''}`}
                 />
-                <Button label="Cadastrar" disabled={!isFormValid()} />
+                <Button 
+                    label={t('register')}
+                    disabled={!isFormValid()}
+                    className={style['button']} 
+                />
             </Card>
         </div>
     );

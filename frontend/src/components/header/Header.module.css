@@ -4,3 +4,12 @@
     border-radius: 5px;
     background-color: #dfdfdf;
 }
+
+.pMenubar{
+    background-color: #dfdfdf;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+}
