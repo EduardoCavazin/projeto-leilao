@@ -4,10 +4,12 @@ import { Card } from "primereact/card";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
+import { useTranslation } from "react-i18next";
 
 function AlterPassword() {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const { t } = useTranslation();
 
     const validatePassword = (password) => {
         const upperCase = /[A-Z]/.test(password);
@@ -32,13 +34,13 @@ function AlterPassword() {
     const footer = (
         <>
             <Divider />
-            <p className="mt-2">Requisitos</p>
-            <ul className="pl-2 ml-2 mt-0 line-height-3">
-                <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>Pelo menos uma letra minúscula</li>
-                <li className={passwordValidation.upperCase ? style.valid : style.invalid}>Pelo menos uma letra maiúscula</li>
-                <li className={passwordValidation.number ? style.valid : style.invalid}>Pelo menos um número</li>
-                <li className={passwordValidation.specialChar ? style.valid : style.invalid}>Pelo menos um caractere especial</li>
-                <li className={passwordValidation.minLength ? style.valid : style.invalid}>Mínimo de 6 caracteres</li>
+            <p className={style.requirementsTitle}>{t('requirements')}</p>
+            <ul className={style.requirementsList}>
+                <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>{t('lowerCase')}</li>
+                <li className={passwordValidation.upperCase ? style.valid : style.invalid}>{t('upperCase')}</li>
+                <li className={passwordValidation.number ? style.valid : style.invalid}>{t('number')}</li>
+                <li className={passwordValidation.specialChar ? style.valid : style.invalid}>{t('specialChar')}</li>
+                <li className={passwordValidation.minLength ? style.valid : style.invalid}>{t('minLength')}</li>
             </ul>
         </>
     );
@@ -50,22 +52,33 @@ function AlterPassword() {
 
     return (
         <div className={style.alterPassContent}>
-            <Card title="Alterar Senha">
-                <Password
-                    placeholder="Nova Senha"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    footer={footer}
-                    toggleMask
+            <Card title={t('changePassword')} className={style.cardContent}>
+                <div className={style.formGroup}>
+                    <Password
+                        placeholder={t('newPassword')}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        footer={footer}
+                        toggleMask
+                        className={style.passwordInput}
+                    />
+                </div>
+                <div className={style.formGroup}>
+                    <Password
+                        placeholder={t('confirmNewPassword')}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        toggleMask
+                        feedback={false}
+                        className={style.passwordInput}
+                    />
+                </div>
+                <Button 
+                    label={t('changePasswordButton')} 
+                    onClick={handleChangePassword} 
+                    disabled={!isPasswordValid} 
+                    className={style.submitButton}
                 />
-                <Password
-                    placeholder="Confirmar Nova Senha"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    toggleMask
-                    feedback={false}
-                />
-                <Button label="Alterar Senha" onClick={handleChangePassword} disabled={!isPasswordValid} />
             </Card>
         </div>
     );

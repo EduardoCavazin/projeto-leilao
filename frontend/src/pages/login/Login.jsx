@@ -55,7 +55,7 @@ const Login = () => {
                     className={style.inputField}
                 />
                 <Password 
-                    placeholder="Password" 
+                    placeholder={t('password')}
                     toggleMask 
                     feedback={false} 
                     onChange={handleChange} 
@@ -64,7 +64,7 @@ const Login = () => {
                     className={style.inputField}
                 />
                 <Link to="/forgot-password" className={style.forgotPasswordLink}>
-                    Esqueceu a senha?
+                {t('recoverPassword')}
                 </Link>
             </Card>
         </div>
