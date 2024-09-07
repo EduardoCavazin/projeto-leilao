@@ -4,4 +4,57 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  height: 100%;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 600px;
+}
+
+.profileHeader {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.profileAvatar {
+  border: 2px solid #ccc;
+  width: 150px; 
+  height: 150px; 
+  margin-bottom: 10px;
+}
+
+.fileInput {
+  display: block;
+  margin-top: 10px;
+}
+
+.profileInfo {
+  flex: 1;
+  text-align: center;
+  
+}
+
+.profileDetails {
+  margin-top: 20px;
+}
+
+.detailItem {
+  margin-bottom: 10px;
+}
+
+.itemText {
+  width: 100%;
+}
+
+.profileFooter {
+  margin-top: 20px;
 }
