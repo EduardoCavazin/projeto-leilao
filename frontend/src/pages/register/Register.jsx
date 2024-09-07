@@ -7,8 +7,10 @@ import { Button } from "primereact/button";
 import { InputMask } from 'primereact/inputmask';
 import { Divider } from "primereact/divider";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const [completeName, setCompleteName] = useState('');
     const [email, setEmail] = useState('');
@@ -86,6 +88,21 @@ function Register() {
         </>
     );
 
+    const storeUser = () => {
+        const user = {
+            completeName,
+            email,
+            cpf,
+            phone,
+            username,
+            password: newPassword
+        };
+
+        console.log(user);
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/login');
+    }
+
     return (
         <div className={style.registerContainer}>
             <Card title="Cadastro" className={style.cardContent}>
@@ -148,6 +165,7 @@ function Register() {
                     label={t('register')}
                     disabled={!isFormValid()}
                     className={style['button']} 
+                    onClick={storeUser}
                 />
             </Card>
         </div>

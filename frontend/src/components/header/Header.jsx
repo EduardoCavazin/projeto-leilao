@@ -7,15 +7,16 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import Logout from '../config/logout/Logout';
 import { Button } from "primereact/button";
 
-
 const Header = () => {
     const navigate = useNavigate();
     const op = useRef(null);
-    const userName = localStorage.getItem('userEmail');
 
     const handleClick = (event) => {
         op.current.toggle(event);
     }
+
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const nameUser = storedUser ? storedUser.completeName : 'Usuário';
 
     const items = [
         {
@@ -31,12 +32,16 @@ const Header = () => {
             key : 'profile',
             label: 'Contact',
             icon: 'pi pi-envelope'
-            
         }
     ];
 
     const end = [
-        <Avatar key='user-icon' icon="pi pi-user" shape="circle" onClick={handleClick} />,
+        <Avatar 
+            key='user-icon' 
+            icon="pi pi-user" 
+            shape="circle" 
+            onClick={handleClick} 
+        />,
     ];
 
     return (
@@ -44,8 +49,12 @@ const Header = () => {
             <Menubar model={items} end={end} className={style.pMenubar} />
             <OverlayPanel ref={op} style={{ width: '300px' }}>
                 <div className={style.userInfo}>
-                    <p>{userName}</p>
-                    <Button label="Perfil" onClick={() => navigate('/profile')} size="small" />
+                    <p>{nameUser}</p>
+                    <Button 
+                        label="Perfil" 
+                        onClick={() => navigate('/profile')} 
+                        size="small" 
+                    />
                     <Logout />
                 </div>
             </OverlayPanel>

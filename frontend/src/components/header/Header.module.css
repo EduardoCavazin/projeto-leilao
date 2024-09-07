@@ -9,7 +9,18 @@
     background-color: #dfdfdf;
 }
 
-.userInfo{
+.userInfo {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+}
+
+.userInfo p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.userInfo button {
+    margin-top: 0.5rem;
 }

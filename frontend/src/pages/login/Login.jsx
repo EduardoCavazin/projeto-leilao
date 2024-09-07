@@ -17,10 +17,11 @@ const Login = () => {
     }
 
     const login = () => {
-        if (user.email === 'eduardo@eduardo' || user.password === '123456') {
-            var token = 'token p/ backend';
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+
+        if (storedUser && user.email === storedUser.email && user.password === storedUser.password) {
+            const token = 'token p/ backend';
             localStorage.setItem("token", token);
-            localStorage.setItem("userEmail", user.email);
             navigate('/');
         } else {
             alert("Usuário ou senha inválidos");
