@@ -30,9 +30,24 @@
     "enterEmail": "Insira o e-mail cadastrado para recuperar a senha.",
     "alert": "Aviso",
     "verificationEmail": "Foi enviado um e-mail para sua conta contendo um código de verificação. Insira o código no campo abaixo para ser redirecionado à página de alteração de senha.",
+    "verificationProfile": "Foi enviado um e-mail. Acesse o e-mail para alterar sua senha.",
     "verify": "Verificar",
+    "editMessage" : "Tem certeza de que deseja alterar o perfil?",
+    "yes": "Sim",
+    "confirmation": "Confirmação",
+    "cancel": "Cancelar",
     "button": {
         "login": "Acessar",
         "register": "Cadastrar"
-    }
+    },
+    "completeName": "Nome Completo",
+    "username": "Nome de Usuário",
+    "cep": "CEP",
+    "adress": "Endereço",
+    "homeNumber": "Número",
+    "complement": "Complemento",
+    "neighborhood": "Bairro",
+    "city": "Cidade",
+    "state": "Estado",
+    "editProfile": "Editar Perfil"
 }

@@ -30,9 +30,24 @@
     "enterEmail": "Enter the registered email to recover your password.",
     "alert": "Alert",
     "verificationEmail": "An email has been sent to your account containing a verification code. Enter the code in the field below to be redirected to the password reset page.",
+    "verificationProfile": "An email has been sent to you. Acess the email to change your password.",
     "verify": "Verify",
+    "editMessage" : "Are you sure you want to edit your profile?",
+    "yes": "Yes",
+    "confirmation": "Confirmation",
+    "cancel": "Cancel",
     "button": {
         "login": "Login",
         "register": "Register"
-    }
+    },
+    "completeName": "Complete Name",
+    "username": "User name",
+    "cep": "ZIP Code",
+    "adress": "Adress",
+    "homeNumber": "Number",
+    "complement": "Complement",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "state": "State",
+    "editProfile": "Edit Profile"
 }

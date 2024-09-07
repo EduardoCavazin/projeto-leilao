@@ -7,8 +7,10 @@ import { Divider } from 'primereact/divider';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
+    const { t } = useTranslation();
     const [user, setUser] = useState({});
     const [editedCompleteName, setEditedCompleteName] = useState('');
     const [editedUserName, setEditedUserName] = useState('');
@@ -19,18 +21,23 @@ const Profile = () => {
     const [editedCity, setEditedCity] = useState('');
     const [editedState, setEditedState] = useState('');
     const [editedComplement, setEditedComplement] = useState('');
+    const [editedBairro, setEditedBairro] = useState('');
     const [avatar, setAvatar] = useState(null);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
             setUser(storedUser);
+            setEditedCompleteName(storedUser.completeName);
+            setEditedUserName(storedUser.userName);
             setEditedEmail(storedUser.email);
             setEditedPhone(storedUser.phone);
-            setEditedAddress(storedUser.address || '');
-            setEditedAddressNumber(storedUser.addressNumber || ''); // Inicializa o número da casa
-            setEditedCity(storedUser.city || '');
-            setEditedState(storedUser.state || '');
+            setEditedAddress(storedUser.address);
+            setEditedAddressNumber(storedUser.addressNumber);
+            setEditedCity(storedUser.city);
+            setEditedState(storedUser.state);
+            setEditedComplement(storedUser.complement);
+            setEditedBairro(storedUser.bairro);
         }
     }, []);
 
@@ -47,11 +54,11 @@ const Profile = () => {
 
     const confirmEdit = () => {
         confirmDialog({
-            message: 'Tem certeza de que deseja alterar o perfil?',
-            header: 'Confirmação',
+            message: t('editMessage'),
+            header: t('confirmation'),
             icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Sim',
-            rejectLabel: 'Cancelar',
+            acceptLabel: t('yes'),
+            rejectLabel: t('cancel'),
             accept: () => handleProfileEdit(),
             reject: () => console.log('Alteração cancelada')
         });
@@ -59,11 +66,11 @@ const Profile = () => {
 
     const changePassword = () => {
         confirmDialog({
-            message: 'Foi enviado um email com link para alteração de senha.',
-            header: 'Confirmação',
+            message: t('verificationProfile'),
+            header: t('confirmation'),
             icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Sim',
-            rejectLabel: 'Cancelar',
+            acceptLabel: t('yes'),
+            rejectLabel: t('cancel'),
             accept: () => console.log('Senha alterada'),
             reject: () => console.log('Alteração cancelada')
         });
@@ -80,8 +87,8 @@ const Profile = () => {
             addressNumber: editedAddressNumber,
             city: editedCity,
             state: editedState,
-            complement: editedComplement
-
+            complement: editedComplement,
+            bairro: editedBairro
         };
         setUser(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -142,7 +149,7 @@ const Profile = () => {
                     <div className={style.profileContent}>
                         <div className={style.profileDetails}>
                             <div className={style.detailItem}>
-                                <strong>Nome Completo</strong>
+                                <strong>{t('completeName')}</strong>
                                 <InputText 
                                     value={editedCompleteName} 
                                     onChange={(e) => setEditedCompleteName(e.target.value)} 
@@ -150,7 +157,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Nome de Usuário</strong>
+                                <strong>{t('username')}</strong>
                                 <InputText 
                                     value={editedUserName} 
                                     onChange={(e) => setEditedUserName(e.target.value)} 
@@ -166,7 +173,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Telefone</strong>
+                                <strong>{t('phone')}</strong>
                                 <InputMask 
                                     mask="(99) 99999-9999" 
                                     value={editedPhone} 
@@ -178,7 +185,7 @@ const Profile = () => {
                         <Divider layout="vertical" />
                         <div className={style.addressDetails}>
                             <div className={style.detailItem}>
-                                <strong>CEP</strong>
+                                <strong>{t('cep')}</strong>
                                 <InputMask 
                                     mask="99999-999" 
                                     onChange={handleCEPChange} 
@@ -186,7 +193,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Endereço</strong>
+                                <strong>{t('adress')}</strong>
                                 <InputText 
                                     value={editedAddress} 
                                     onChange={(e) => setEditedAddress(e.target.value)} 
@@ -194,7 +201,15 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Número</strong>
+                                <strong>{t('neighborhood')}</strong>
+                                <InputText 
+                                    value={editedBairro} 
+                                    onChange={(e) => setEditedBairro(e.target.value)} 
+                                    className={style.itemText} 
+                                />
+                            </div>
+                            <div className={style.detailItem}>
+                                <strong>{t('homeNumber')}</strong>
                                 <InputText 
                                     value={editedAddressNumber} 
                                     onChange={(e) => setEditedAddressNumber(e.target.value)} 
@@ -202,7 +217,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Complemento</strong>
+                                <strong>{t('complement')}</strong>
                                 <InputText 
                                     value={editedComplement} 
                                     onChange={(e) => setEditedComplement(e.target.value)} 
@@ -210,7 +225,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Cidade</strong>
+                                <strong>{t('city')}</strong>
                                 <InputText 
                                     value={editedCity} 
                                     onChange={(e) => setEditedCity(e.target.value)} 
@@ -218,7 +233,7 @@ const Profile = () => {
                                 />
                             </div>
                             <div className={style.detailItem}>
-                                <strong>Estado</strong>
+                                <strong>{t('state')}</strong>
                                 <InputText 
                                     value={editedState} 
                                     onChange={(e) => setEditedState(e.target.value)} 
@@ -230,13 +245,13 @@ const Profile = () => {
 
                     <div className={style.profileFooter}>
                         <Button 
-                            label="Alterar Senha" 
+                            label={t('changePassword')} 
                             className="p-button-danger" 
                             text 
                             onClick={changePassword} 
                         />
                         <Button 
-                            label="Editar Perfil" 
+                            label={t('editProfile')}
                             className="p-button-primary" 
                             text 
                             onClick={confirmEdit} 
