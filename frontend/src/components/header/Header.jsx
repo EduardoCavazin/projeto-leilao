@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import style from "./Header.module.css";
 import { Menubar } from 'primereact/menubar';
 import { Avatar } from 'primereact/avatar';
@@ -6,21 +6,29 @@ import { useNavigate } from "react-router-dom";
 import { OverlayPanel } from 'primereact/overlaypanel';
 import Logout from '../config/logout/Logout';
 import { Button } from "primereact/button";
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
     const navigate = useNavigate();
     const op = useRef(null);
+    const { t, i18n } = useTranslation();
+    const [language, setLanguage] = useState(i18n.language);
 
     const handleClick = (event) => {
         op.current.toggle(event);
     }
+
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+        setLanguage(lang);
+    };
 
     const storedUser = JSON.parse(localStorage.getItem('user'));
     const nameUser = storedUser ? storedUser.completeName : 'Usuário';
 
     const items = [
         {
-            key : 'home',
+            key: 'home',
             label: 'Home',
             icon: 'pi pi-home',
             command: () => {
@@ -29,7 +37,7 @@ const Header = () => {
             }
         },
         {
-            key : 'profile',
+            key: 'profile',
             label: 'Contact',
             icon: 'pi pi-envelope'
         }
@@ -44,6 +52,8 @@ const Header = () => {
         />,
     ];
 
+    const isEnglish = language === 'en';
+
     return (
         <div className={style.header}>
             <Menubar model={items} end={end} className={style.pMenubar} />
@@ -51,9 +61,15 @@ const Header = () => {
                 <div className={style.userInfo}>
                     <p>{nameUser}</p>
                     <Button 
-                        label="Perfil" 
+                        label={t('profile')} 
                         onClick={() => navigate('/profile')} 
                         size="small" 
+                    />
+                    <Button 
+                        label={isEnglish ? "Português" : "English"} 
+                        className={`${style.button} ${isEnglish ? style.buttonEnglish : style.buttonPortuguese}`} 
+                        onClick={() => changeLanguage(isEnglish ? 'pt' : 'en')} 
+                        size="small"
                     />
                     <Logout />
                 </div>

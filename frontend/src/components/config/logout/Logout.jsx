@@ -1,8 +1,10 @@
 import { Button } from "primereact/button";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Logout = () => {
+    const { t } = useTranslation();
     const navigation = useNavigate();
 
     const logout = () => {
@@ -13,7 +15,7 @@ const Logout = () => {
 
     return(
         <>
-            <Button label='Sair' onClick={logout} severity="danger"/>
+            <Button label={t('logout')} onClick={logout} severity="danger"/>
         </>
     );
 }
