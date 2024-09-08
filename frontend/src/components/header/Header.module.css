@@ -24,3 +24,13 @@
 .userInfo button {
     margin-top: 0.5rem;
 }
+
+.buttonEnglish {
+    background-color: #4CAF50; /* Verde para inglês */
+    color: white;
+}
+
+.buttonPortuguese {
+    background-color: #2196F3; /* Azul para português */
+    color: white;
+}
