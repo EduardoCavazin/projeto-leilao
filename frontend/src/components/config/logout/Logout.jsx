@@ -9,7 +9,7 @@ const Logout = () => {
 
     const logout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('usuario');
+        localStorage.removeItem('user')
         navigation('/login');
     }
 

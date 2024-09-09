@@ -28,6 +28,7 @@ function Register() {
         password: false,
         confirmPassword: false
     });
+    const [isCpfValid, setIsCpfValid] = useState(true); 
 
     const handleBlur = (field) => {
         setTouchedFields({
@@ -70,7 +71,8 @@ function Register() {
             passwordValidation.number &&
             passwordValidation.specialChar &&
             passwordValidation.minLength &&
-            newPassword === confirmPassword
+            newPassword === confirmPassword &&
+            isCpfValid 
         );
     };
 
@@ -79,7 +81,7 @@ function Register() {
             <Divider />
             <p className="mt-2">{t('requirements')}</p>
             <ul className="pl-2 ml-2 mt-0 line-height-3">
-            <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>{t('lowerCase')}</li>
+                <li className={passwordValidation.lowerCase ? style.valid : style.invalid}>{t('lowerCase')}</li>
                 <li className={passwordValidation.upperCase ? style.valid : style.invalid}>{t('upperCase')}</li>
                 <li className={passwordValidation.number ? style.valid : style.invalid}>{t('number')}</li>
                 <li className={passwordValidation.specialChar ? style.valid : style.invalid}>{t('specialChar')}</li>
@@ -101,7 +103,53 @@ function Register() {
         console.log(user);
         localStorage.setItem('user', JSON.stringify(user));
         navigate('/login');
-    }
+    };
+
+    const cpfTest = (cpfString) => {
+        let sum;
+        let remainder;
+        sum = 0;
+
+        if (cpfString === "00000000000") return false;
+
+        for (let i = 1; i <= 9; i++) {
+            sum = sum + parseInt(cpfString.substring(i - 1, i)) * (11 - i);
+        }
+
+        remainder = (sum * 10) % 11;
+
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        if (remainder !== parseInt(cpfString.substring(9, 10))) return false;
+
+        sum = 0;
+        for (let i = 1; i <= 10; i++) {
+            sum = sum + parseInt(cpfString.substring(i - 1, i)) * (12 - i);
+        }
+        remainder = (sum * 10) % 11;
+
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        if (remainder !== parseInt(cpfString.substring(10, 11))) return false;
+
+        return true;
+    };
+
+    const validateCPF = (e) => {
+        const cpfValue = e.target.value.replace(/[^\d]/g, ''); 
+        if (cpfTest(cpfValue)) {
+            setIsCpfValid(true);
+            setCpf(e.target.value);
+        } else {
+            setIsCpfValid(false);
+        }
+    };
+
+    const validateEmail = (e) => {
+        const emailValue = e.target.value;
+        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+        if (emailRegex.test(emailValue)) {
+            setEmail(emailValue);
+        }
+    };
 
     return (
         <div className={style.registerContainer}>
@@ -116,7 +164,7 @@ function Register() {
                 <InputText
                     placeholder={t('email')}
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={validateEmail}
                     onBlur={() => handleBlur('email')}
                     className={`${style['input-field']} ${touchedFields.email && !isFieldValid(email) ? 'p-invalid' : ''}`}
                 />
@@ -124,9 +172,9 @@ function Register() {
                     mask="999.999.999-99"
                     placeholder={t('cpf')}
                     value={cpf}
-                    onChange={(e) => setCpf(e.target.value)}
+                    onChange={validateCPF}
                     onBlur={() => handleBlur('cpf')}
-                    className={`${style['input-field']} ${touchedFields.cpf && !isFieldValid(cpf) ? 'p-invalid' : ''}`}
+                    className={`${style['input-field']} ${touchedFields.cpf && !isCpfValid ? 'p-invalid' : ''}`}
                 />
                 <InputMask
                     mask="(99) 99999-9999"
