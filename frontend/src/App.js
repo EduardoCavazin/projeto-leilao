@@ -17,9 +17,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRouter />}>
-            <Route path="/" element={<DefaultLayout><AdminHome /></DefaultLayout>} />
+            <Route path="/" element={<DefaultLayout><Home /></DefaultLayout>} />
             <Route path="/profile" element={<DefaultLayout><Profile /></DefaultLayout>} />
-            
+            <Route path="/admin" element={<DefaultLayout><AdminHome /></DefaultLayout>} />
           </Route>
           <Route path='/login' element={<SimpleLayout><Login /></SimpleLayout>} />
           <Route path='/forgot-password' element={<SimpleLayout><ForgotPassword /></SimpleLayout>} />
