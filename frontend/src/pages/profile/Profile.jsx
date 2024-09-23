@@ -14,6 +14,7 @@ const Profile = () => {
     const [user, setUser] = useState({});
     const [editedCompleteName, setEditedCompleteName] = useState('');
     const [editedUserName, setEditedUserName] = useState('');
+    const [editedCpf, setEditedCPF] = useState('');
     const [editedEmail, setEditedEmail] = useState('');
     const [editedPhone, setEditedPhone] = useState('');
     const [editedAddress, setEditedAddress] = useState('');
@@ -29,6 +30,7 @@ const Profile = () => {
         if (storedUser) {
             setUser(storedUser);
             setEditedCompleteName(storedUser.completeName);
+            setEditedCPF(storedUser.cpf);
             setEditedUserName(storedUser.userName);
             setEditedEmail(storedUser.email);
             setEditedPhone(storedUser.phone);
@@ -80,6 +82,7 @@ const Profile = () => {
         const updatedUser = { 
             ...user,
             completeName: editedCompleteName,
+            cpf: editedCpf,
             userName: editedUserName,
             email: editedEmail, 
             phone: editedPhone,
@@ -153,6 +156,15 @@ const Profile = () => {
                                 <InputText 
                                     value={editedCompleteName} 
                                     onChange={(e) => setEditedCompleteName(e.target.value)} 
+                                    className={style.itemText} 
+                                />
+                            </div>
+                            <div className={style.detailItem}>
+                                <strong>CPF</strong>
+                                <InputMask
+                                    mask="999.999.999-99" 
+                                    value={editedCpf} 
+                                    onChange={(e) => setEditedCPF(e.target.value)} 
                                     className={style.itemText} 
                                 />
                             </div>
