@@ -23,6 +23,7 @@ public class PersonService {
         Person personSaved = personRepository.findById(person.getId())
                 .orElseThrow(() -> new NoSuchElementException("Objeto não encontrado"));
         personSaved.setName(person.getName());
+        personSaved.setEmail(person.getEmail());
         return personRepository.save(personSaved);
     }
 
@@ -32,7 +33,4 @@ public class PersonService {
         personRepository.delete(personSaved);
     }
 
-    public List<Person> listAll() {
-        return personRepository.findAll();
-    }
 }

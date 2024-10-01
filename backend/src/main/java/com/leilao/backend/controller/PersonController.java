@@ -14,12 +14,10 @@ import com.leilao.backend.service.ProfileService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
-    
+
     @Autowired
     private ProfileService profileService;
 
@@ -38,9 +36,4 @@ public class PersonController {
         profileService.delete(id);
     }
 
-    @GetMapping
-    public List<Profile> listAll() {
-        return profileService.listAll();
-    }
-    
 }
