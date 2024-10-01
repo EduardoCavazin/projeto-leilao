@@ -25,6 +25,8 @@ public class Person {
     private String email;
 
     private String password;
+
+    @Column(name = "validation_code")
     private String validationCode;
     private LocalDateTime validationDate;
 }
