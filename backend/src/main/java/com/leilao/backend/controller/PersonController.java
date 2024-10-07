@@ -1,6 +1,5 @@
 package com.leilao.backend.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.leilao.backend.model.Profile;
-import com.leilao.backend.service.ProfileService;
+import com.leilao.backend.model.Person;
+import com.leilao.backend.service.PersonService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
@@ -17,21 +19,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class PersonController {
 
     @Autowired
-    private ProfileService profileService;
+    private PersonService personService;
 
     @PostMapping
-    public Profile create(@RequestBody Profile profile) {
-        return profileService.create(profile);
+    public Person create(@Valid @RequestBody Person person) {
+        return personService.create(person);
     }
 
     @PutMapping
-    public Profile update(@RequestBody Profile profile) {
-        return profileService.update(profile);
+    public Person update(@Valid @RequestBody Person person) {
+        return personService.update(person);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-        profileService.delete(id);
+        personService.delete(id);
     }
 
 }
