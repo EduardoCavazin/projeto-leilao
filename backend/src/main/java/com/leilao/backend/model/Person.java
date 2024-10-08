@@ -33,7 +33,8 @@ public class Person {
     @NotBlank(message = "Name is required")
     private String name;
 
-    @Email(message = "Email is required")
+    @Email(message = "Email is not valid")
+    @NotBlank(message = "Email is required")
     private String email;
 
     @JsonIgnore
