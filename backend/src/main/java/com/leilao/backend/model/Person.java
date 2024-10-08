@@ -30,11 +30,11 @@ public class Person {
 
     
     @Column(name = "name")
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "{name.required}")
     private String name;
 
-    @Email(message = "Email is not valid")
-    @NotBlank(message = "Email is required")
+    @Email(message = "{email.invalid}")
+    @NotBlank(message = "{email.required}")
     private String email;
 
     @JsonIgnore

@@ -4,9 +4,12 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 import com.leilao.backend.model.Person;
 import com.leilao.backend.repository.PersonRepository;
+
+import jakarta.mail.MessagingException;
 
 @Service
 public class PersonService {
@@ -14,8 +17,20 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public Person create(Person person) {
-        return personRepository.save(person);
+        Person personSaved = personRepository.save(person);
+        Context context = new Context();
+        context.setVariable("name", personSaved.getName());
+        try {
+            emailService.sendTemplateEmail(personSaved.getEmail(), "Cadastro Efetuado com Sucesso", context, "emailWelcome");
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return personSaved;
     }
 
     public Person update(Person person) {
