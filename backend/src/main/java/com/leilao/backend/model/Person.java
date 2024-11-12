@@ -1,9 +1,19 @@
 package com.leilao.backend.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +23,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
@@ -22,13 +33,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "person")
 @Data
-public class Person {
-    
+@JsonIgnoreProperties({ "authorities", "enabled", "accountNonLocked", "credentialsNonExpired", "accountNonExpired" })
+public class Person implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    
     @Column(name = "name")
     @NotBlank(message = "{name.required}")
     private String name;
@@ -37,11 +48,21 @@ public class Person {
     @NotBlank(message = "{email.required}")
     private String email;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @Transient
+    private final static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void setPassword(String password) {
+        this.password = passwordEncoder.encode(password);
+    }
+
+    @JsonIgnore
     @Column(name = "validation_code")
     private String validationCode;
+
+    @JsonIgnore
     private LocalDateTime validationDate;
 
     @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
@@ -49,10 +70,22 @@ public class Person {
     private List<PersonPofile> personPofile;
 
     public void setPersonPofile(List<PersonPofile> listPersonPofile) {
-        for(PersonPofile profile : listPersonPofile) {
+        for (PersonPofile profile : listPersonPofile) {
             profile.setPerson(this);
         }
         personPofile = listPersonPofile;
     }
-    
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return personPofile.stream()
+                .map(userRole -> new SimpleGrantedAuthority(userRole.getProfile().getName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
 }
