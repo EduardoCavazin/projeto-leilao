@@ -1,7 +1,74 @@
+<!DOCTYPE html>
 <html>
-    <body>
+
+<head>
+    <style>
+        /* Estilo geral do corpo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Caixa centralizada */
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Títulos */
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        /* Links */
+        a {
+            color: #ffffff;
+            background-color: #4CAF50;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Parágrafos */
+        p {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        /* Rodapé */
+        .footer {
+            font-size: 0.8em;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
         <h2>Cadastro efetuado com sucesso!</h2>
         <p>Olá, <span th:text="${name}"></span></p>
         <p>Seja bem-vindo ao sistema de Leilão!</p>
-    </body>
+        <p>Por favor, confirme seu cadastro clicando no link abaixo:</p>
+        <p>
+            <a th:href="${confirmationLink}" target="_blank">Confirmar Cadastro</a>
+        </p>
+        <div class="footer">
+            <p>© 2024 Sistema de Leilão. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</body>
+
 </html>
