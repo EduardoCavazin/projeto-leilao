@@ -1,4 +1,4 @@
-package com.leilao.backend.model;
+package com.leilao.backend.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
