@@ -9,6 +9,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByEmail(String username);
 
-    Optional<Person> findByEmailAndValidationCode(String email, Integer code);
+    Optional<Person> findByEmailAndRecoveryCode(String email, Integer code);
     
 }

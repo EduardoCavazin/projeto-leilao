@@ -44,7 +44,7 @@ public class Person implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     @NotBlank(message = "{name.required}")
     private String name;
 
@@ -56,6 +56,9 @@ public class Person implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @Column(name = "is_verified", nullable = false)
+    private boolean isVerified = false; 
+
     @Transient
     private final static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -64,15 +67,12 @@ public class Person implements UserDetails {
     }
 
     @JsonIgnore
-    @Column(name = "validation_code", nullable = true)
-    private Integer validationCode;
-
-    @JsonIgnore
-    @Column(name = "recovery_code")
-    private Integer recoveryCode;
+    @Column(name = "recovery_code", nullable = true)
+    private Integer recoveryCode; 
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date validationCodeValidity;
+    @Column(name = "recovery_code_validity", nullable = true)
+    private Date recoveryCodeValidity; 
 
     @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter(value = AccessLevel.NONE)
@@ -96,5 +96,4 @@ public class Person implements UserDetails {
     public String getUsername() {
         return email;
     }
-
 }
