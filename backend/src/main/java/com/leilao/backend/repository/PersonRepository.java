@@ -8,5 +8,7 @@ import com.leilao.backend.model.Person;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByEmail(String username);
+
+    Optional<Person> findByEmailAndValidationCode(String email, Integer code);
     
 }

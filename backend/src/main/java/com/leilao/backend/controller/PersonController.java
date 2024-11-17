@@ -42,6 +42,11 @@ public class PersonController {
                 jwtService.generateToken(authentication.getName()));
     }
 
+    @PostMapping("/password-code-request")
+    public String passwordCodeRequest(@RequestBody PersonAuthRequestDTO person){
+        return personService.passwordCodeRequest(person);
+    }
+
     @PostMapping
     public Person create(@Valid @RequestBody Person person) {
         return personService.create(person);
