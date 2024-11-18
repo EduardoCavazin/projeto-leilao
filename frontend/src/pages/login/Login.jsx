@@ -6,26 +6,31 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { useTranslation } from "react-i18next";
+import PersonService from "../../services/PersonSerice";
 
 const Login = () => {
     const [user, setUser] = useState({ email: '', password: '' });
     const navigate = useNavigate();
     const { t } = useTranslation();
 
+    const personService = new PersonService();
+
     const handleChange = (input) => {
         setUser({ ...user, [input.target.name]: input.target.value });
     }
 
-    const login = () => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-
-        if (storedUser && user.email === storedUser.email && user.password === storedUser.password) {
-            const token = 'token p/ backend';
-            localStorage.setItem("token", token);
-            navigate('/');
-        } else {
-            alert("Usuário ou senha inválidos");
+    const login = async () => {
+        try{
+            const response = await personService.login(user);
+            let token = response.token;
+            localStorage.setItem('token', token);
+            localStorage.setItem('email', user.email);
+            navigate("/");
+        }catch(err){
+            console.log(err);
+            alert("Usuário ou senha incorretos");
         }
+        
     }
 
     const buttons = (
