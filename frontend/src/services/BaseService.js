@@ -1,4 +1,4 @@
-import api from '/components/config';
+import api from '../components/config/axiosConfig';
 
 class BaseService {
 
