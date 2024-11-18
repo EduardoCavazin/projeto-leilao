@@ -1,0 +1,36 @@
+.header {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #dfdfdf;
+}
+
+.pMenubar{
+    background-color: #dfdfdf;
+}
+
+.userInfo {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.userInfo p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.userInfo button {
+    margin-top: 0.5rem;
+}
+
+.buttonEnglish {
+    background-color: #4CAF50; /* Verde para inglês */
+    color: white;
+}
+
+.buttonPortuguese {
+    background-color: #2196F3; /* Azul para português */
+    color: white;
+}
