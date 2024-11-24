@@ -72,5 +72,10 @@
     "september": "Setembro",
     "october": "Outubro",
     "november": "Novembro",
-    "december": "Dezembro"
+    "december": "Dezembro",
+    "registerSuccess": "Cadastro realizado com sucesso! Verifique seu e-mail.",
+    "registerError": "Erro ao realizar o cadastro. Tente novamente.",
+    "success": "Sucesso",
+    "error": "Erro",
+    "checkEmail": "Cadastro realizado com sucesso! Verifique seu e-mail antes de realizar o login."
 }

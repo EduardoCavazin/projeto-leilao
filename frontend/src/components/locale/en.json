@@ -72,5 +72,10 @@
     "september": "September",
     "october": "October",
     "november": "November",
-    "december": "December"
+    "december": "December",
+    "registerSuccess": "Registered successfully! Check your email.",
+    "registerError": "Error registering! Check your data.",
+    "success": "Success",
+    "error": "Error",
+    "checkEmail": "Registered successfully! Check your email before logging in."
 }

@@ -46,6 +46,18 @@ public class Person implements UserDetails {
     @NotBlank(message = "{name.required}")
     private String name;
 
+    @Column(name = "cpf", nullable = false, unique = true)
+    @NotBlank(message = "{cpf.required}")
+    private String cpf;
+
+    @Column(name = "phone_number", nullable = false)
+    @NotBlank(message = "{phone.required}")
+    private String phoneNumber;
+
+    @Column(name = "username", nullable = false, unique = true)
+    @NotBlank(message = "{username.required}")
+    private String username;
+
     @Email(message = "{email.invalid}")
     @NotBlank(message = "{email.required}")
     @Column(unique = true, nullable = false)
