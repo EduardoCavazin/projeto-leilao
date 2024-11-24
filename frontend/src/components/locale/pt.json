@@ -82,5 +82,11 @@
     "recoveryCode": "Código de Recuperação.",
     "emailNotFound": "Email não encontrado",
     "passwordChanged": "Senha alterada com sucesso!",
-    "errorChangingPassword": "Erro ao alterar a senha. Tente novamente."
+    "errorChangingPassword": "Erro ao alterar a senha. Tente novamente.",
+    "error401Title": "401 - Não Autorizado",
+    "error401Message": "Você não tem permissão para acessar esta página.",
+    "backToLogin": "Voltar para o Login",
+    "error404Title": "404 - Página Não Encontrada",
+    "error404Message": "Desculpe, a página que você está tentando acessar não existe.",
+    "backToHome": "Voltar para o Início"
 }

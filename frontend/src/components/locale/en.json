@@ -82,5 +82,11 @@
     "recoveryCode": "Recovery code.",
     "emailNotFound": "Email not found",
     "passwordChanged": "Password changed successfully!",
-    "errorChangingPassword": "Error changing password! Try again."
+    "errorChangingPassword": "Error changing password! Try again.",
+    "error401Title": "401 - Unauthorized",
+    "error401Message": "You do not have permission to access this page.",
+    "backToLogin": "Back to Login",
+    "error404Title": "404 - Page Not Found",
+    "error404Message": "Sorry, the page you are trying to access does not exist.",
+    "backToHome": "Back to Home"
 }
