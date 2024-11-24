@@ -55,7 +55,7 @@ public class PersonService implements UserDetailsService {
 
         Person personSaved = personRepository.save(person);
 
-        String confirmationLink = "http://localhost:8080/api/person/confirm?email=" + personSaved.getEmail();
+        String confirmationLink = "http://localhost:3000/confirm?email=" + personSaved.getEmail();
         Context context = new Context();
         context.setVariable("name", personSaved.getName());
         context.setVariable("confirmationLink", confirmationLink);

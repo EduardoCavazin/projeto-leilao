@@ -47,13 +47,10 @@ class PersonService extends BaseService {
     }
 
     async confirmAccount(email) {
-        try {
-            const response = await this.api.get(`${this.endpoint}/confirm`, { params: { email } });
-            return response.data;
-        } catch (error) {
-            console.error("Erro ao confirmar conta:", error);
-            throw error;
-        }
+        const response = await this.api.get(`${this.endpoint}/confirm`, {
+            params: { email } 
+        });
+        return response.data;
     }
 }
 

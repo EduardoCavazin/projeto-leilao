@@ -10,6 +10,7 @@ import Register from './pages/register/Register';
 import PrivateRouter from './components/PrivateRouter';
 import Profile from './pages/profile/Profile';
 import AdminHome from './pages/adminHome/AdminHome';
+import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path='/forgot-password' element={<SimpleLayout><ForgotPassword /></SimpleLayout>} />
           <Route path='/alter-password' element={<SimpleLayout><AlterPassword /></SimpleLayout>} />
           <Route path='/register' element={<SimpleLayout><Register /></SimpleLayout>} />
-
+          <Route path='confirm' element={<SimpleLayout><ConfirmAccount /></SimpleLayout>} />
         </Routes>
       </BrowserRouter>
     </>
