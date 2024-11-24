@@ -77,5 +77,10 @@
     "registerError": "Error registering! Check your data.",
     "success": "Success",
     "error": "Error",
-    "checkEmail": "Registered successfully! Check your email before logging in."
+    "checkEmail": "Registered successfully! Check your email before logging in.",
+    "codeSent": "Code sent successfully! Check your email.",
+    "recoveryCode": "Recovery code.",
+    "emailNotFound": "Email not found",
+    "passwordChanged": "Password changed successfully!",
+    "errorChangingPassword": "Error changing password! Try again."
 }

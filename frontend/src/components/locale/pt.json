@@ -77,5 +77,10 @@
     "registerError": "Erro ao realizar o cadastro. Tente novamente.",
     "success": "Sucesso",
     "error": "Erro",
-    "checkEmail": "Cadastro realizado com sucesso! Verifique seu e-mail antes de realizar o login."
+    "checkEmail": "Cadastro realizado com sucesso! Verifique seu e-mail antes de realizar o login.",
+    "codeSent:": "Código enviado para o e-mail cadastrado.",
+    "recoveryCode": "Código de Recuperação.",
+    "emailNotFound": "Email não encontrado",
+    "passwordChanged": "Senha alterada com sucesso!",
+    "errorChangingPassword": "Erro ao alterar a senha. Tente novamente."
 }
