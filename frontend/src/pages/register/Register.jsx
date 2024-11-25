@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import style from './Register.module.css';
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
@@ -8,10 +8,13 @@ import { InputMask } from 'primereact/inputmask';
 import { Divider } from "primereact/divider";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "primereact/toast";
+import PersonService from "../../services/PersonSerice";
 
 function Register() {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const toast = useRef(null);
     const [completeName, setCompleteName] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -28,7 +31,7 @@ function Register() {
         password: false,
         confirmPassword: false
     });
-    const [isCpfValid, setIsCpfValid] = useState(true); 
+    const [isCpfValid, setIsCpfValid] = useState(true);
 
     const handleBlur = (field) => {
         setTouchedFields({
@@ -72,7 +75,7 @@ function Register() {
             passwordValidation.specialChar &&
             passwordValidation.minLength &&
             newPassword === confirmPassword &&
-            isCpfValid 
+            isCpfValid
         );
     };
 
@@ -90,19 +93,48 @@ function Register() {
         </>
     );
 
-    const storeUser = () => {
+    const storeUser = async () => {
         const user = {
-            completeName,
+            name: completeName,
             email,
             cpf,
-            phone,
+            phoneNumber: phone,
             username,
             password: newPassword
         };
 
-        console.log(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate('/login');
+        try {
+            const personService = new PersonService();
+            await personService.register(user);
+
+            
+            toast.current.show({
+                severity: 'success',
+                summary: t('success'),
+                detail: t('checkEmail'),
+                life: 3000
+            });
+
+            setTimeout(() => {
+                navigate('/login'); 
+            }, 3000);
+        } catch (error) {
+            if (error.response?.data?.message) {
+                toast.current.show({
+                    severity: 'error',
+                    summary: t('error'),
+                    detail: error.response.data.message,
+                    life: 5000
+                });
+            } else {
+                toast.current.show({
+                    severity: 'error',
+                    summary: t('error'),
+                    detail: t('registerError'),
+                    life: 5000
+                });
+            }
+        }
     };
 
     const cpfTest = (cpfString) => {
@@ -134,7 +166,7 @@ function Register() {
     };
 
     const validateCPF = (e) => {
-        const cpfValue = e.target.value.replace(/[^\d]/g, ''); 
+        const cpfValue = e.target.value.replace(/[^\d]/g, '');
         if (cpfTest(cpfValue)) {
             setIsCpfValid(true);
             setCpf(e.target.value);
@@ -145,10 +177,7 @@ function Register() {
 
     const validateEmail = (e) => {
         const emailValue = e.target.value;
-        const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-        if (emailRegex.test(emailValue)) {
-            setEmail(emailValue);
-        }
+        setEmail(emailValue);
     };
 
     return (
@@ -164,9 +193,9 @@ function Register() {
                 <InputText
                     placeholder={t('email')}
                     value={email}
-                    onChange={validateEmail}
+                    onChange={(e) => setEmail(e.target.value)}
                     onBlur={() => handleBlur('email')}
-                    className={`${style['input-field']} ${touchedFields.email && !isFieldValid(email) ? 'p-invalid' : ''}`}
+                    className={`${style['input-field']} ${touchedFields.email && !/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i.test(email) ? 'p-invalid' : ''}`}
                 />
                 <InputMask
                     mask="999.999.999-99"
@@ -209,10 +238,11 @@ function Register() {
                     feedback={false}
                     className={`${style['input-field']} ${touchedFields.confirmPassword && newPassword !== confirmPassword ? 'p-invalid' : ''}`}
                 />
-                <Button 
+                <Toast ref={toast}/>
+                <Button
                     label={t('register')}
                     disabled={!isFormValid()}
-                    className={style['button']} 
+                    className={style['button']}
                     onClick={storeUser}
                 />
             </Card>

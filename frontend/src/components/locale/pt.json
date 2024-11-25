@@ -72,5 +72,21 @@
     "september": "Setembro",
     "october": "Outubro",
     "november": "Novembro",
-    "december": "Dezembro"
+    "december": "Dezembro",
+    "registerSuccess": "Cadastro realizado com sucesso! Verifique seu e-mail.",
+    "registerError": "Erro ao realizar o cadastro. Tente novamente.",
+    "success": "Sucesso",
+    "error": "Erro",
+    "checkEmail": "Cadastro realizado com sucesso! Verifique seu e-mail antes de realizar o login.",
+    "codeSent:": "Código enviado para o e-mail cadastrado.",
+    "recoveryCode": "Código de Recuperação.",
+    "emailNotFound": "Email não encontrado",
+    "passwordChanged": "Senha alterada com sucesso!",
+    "errorChangingPassword": "Erro ao alterar a senha. Tente novamente.",
+    "error401Title": "401 - Não Autorizado",
+    "error401Message": "Você não tem permissão para acessar esta página.",
+    "backToLogin": "Voltar para o Login",
+    "error404Title": "404 - Página Não Encontrada",
+    "error404Message": "Desculpe, a página que você está tentando acessar não existe.",
+    "backToHome": "Voltar para o Início"
 }

@@ -45,10 +45,17 @@ public class PersonService implements UserDetailsService {
             throw new IllegalArgumentException("E-mail já está em uso.");
         }
 
+        if (personRepository.findByCpf(person.getCpf()).isPresent()) {
+            throw new IllegalArgumentException("CPF já está em uso.");
+        }
+
+        if (personRepository.findByUsername(person.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("Nome de usuário já está em uso.");
+        }
+
         Person personSaved = personRepository.save(person);
 
-        String confirmationLink = "http://localhost:8080/api/person/confirm?email=" + personSaved.getEmail();
-
+        String confirmationLink = "http://localhost:3000/confirm?email=" + personSaved.getEmail();
         Context context = new Context();
         context.setVariable("name", personSaved.getName());
         context.setVariable("confirmationLink", confirmationLink);

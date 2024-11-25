@@ -1,12 +1,10 @@
 package com.leilao.backend.model;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,6 +45,18 @@ public class Person implements UserDetails {
     @Column(name = "name", nullable = false)
     @NotBlank(message = "{name.required}")
     private String name;
+
+    @Column(name = "cpf", nullable = false, unique = true)
+    @NotBlank(message = "{cpf.required}")
+    private String cpf;
+
+    @Column(name = "phone_number", nullable = false)
+    @NotBlank(message = "{phone.required}")
+    private String phoneNumber;
+
+    @Column(name = "username", nullable = false, unique = true)
+    @NotBlank(message = "{username.required}")
+    private String username;
 
     @Email(message = "{email.invalid}")
     @NotBlank(message = "{email.required}")
