@@ -31,7 +31,7 @@ public class CategoryController {
 
     @PutMapping
     public Category update(@RequestBody Category category) {
-        return categoryService.create(category);
+        return categoryService.update(category);
     }
 
     @GetMapping
