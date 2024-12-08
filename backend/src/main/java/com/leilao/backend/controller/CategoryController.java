@@ -3,6 +3,7 @@ package com.leilao.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.leilao.backend.model.Category;
 import com.leilao.backend.service.CategoryService;
 
-import jakarta.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/api/category")
 @CrossOrigin
@@ -27,11 +26,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public Category create(@RequestBody Category category) {
         return categoryService.create(category);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public Category update(@RequestBody Category category) {
         return categoryService.create(category);
     }
@@ -42,14 +43,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable("id") Long id) {
         categoryService.delete(id);
-    }
-
-    @GetMapping("/find")
-    public String find(@PathParam("name") String name,
-            @PathParam("age") Integer age) {    
-        System.out.println(name + " " + age);
-        return name + " " + age;
     }
 }
