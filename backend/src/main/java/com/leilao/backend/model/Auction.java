@@ -2,6 +2,7 @@ package com.leilao.backend.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -42,5 +43,10 @@ public class Auction {
     private Person person;
 
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Images> images;
+    private List<Images> images = new ArrayList<>();
+
+    public void addImage(Images image) {
+        images.add(image);
+        image.setAuction(this);
+    }
 }

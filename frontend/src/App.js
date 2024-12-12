@@ -27,7 +27,7 @@ function App() {
             <Route path="/profile" element={<DefaultLayout><Profile /></DefaultLayout>} />
             <Route path="/admin" element={<DefaultLayout><AdminHome /></DefaultLayout>} />
             <Route path="/category" element={<DefaultLayout><Category /></DefaultLayout>} />
-            <Route path="/auctions" element={<DefaultLayout><AuctionList /></DefaultLayout>} />
+            <Route path="/auctions/public" element={<DefaultLayout><AuctionList /></DefaultLayout>} />
             <Route path="/auctions/new" element={<DefaultLayout><AuctionForm /></DefaultLayout>} />
           </Route>
 

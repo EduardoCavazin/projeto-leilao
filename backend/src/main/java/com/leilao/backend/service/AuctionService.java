@@ -28,11 +28,10 @@ public class AuctionService {
         auction.setPerson(authPersonProvider.getAuthenticatedUser());
 
         if (files != null && !files.isEmpty()) {
-            List<Images> images = files.stream()
-                    .map(this::processImage)
-                    .collect(Collectors.toList());
-            images.forEach(image -> image.setAuction(auction));
-            auction.setImages(images);
+            for (MultipartFile file : files) {
+                Images images = processImage(file);
+                auction.addImage(images);
+            }
         }
 
         return auctionRepository.save(auction);
@@ -93,10 +92,11 @@ public class AuctionService {
         Images image = new Images();
         image.setFileName(file.getOriginalFilename());
         image.setFileType(file.getContentType());
+        image.setSize(file.getSize());
         try {
             image.setData(file.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao processar imagem", e);
+            throw new RuntimeException("Erro ao processar imagem: " + file.getOriginalFilename(), e);
         }
         return image;
     }
