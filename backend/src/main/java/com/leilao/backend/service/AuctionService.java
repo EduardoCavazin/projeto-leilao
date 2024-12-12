@@ -1,12 +1,16 @@
 package com.leilao.backend.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.leilao.backend.model.Auction;
+import com.leilao.backend.model.Images;
 import com.leilao.backend.model.Person;
 import com.leilao.backend.repository.AuctionRepository;
 import com.leilao.backend.security.AuthPersonProvider;
@@ -17,17 +21,27 @@ public class AuctionService {
     @Autowired
     private AuctionRepository auctionRepository;
 
-        @Autowired
+    @Autowired
     private AuthPersonProvider authPersonProvider;
 
-    public Auction create(Auction auction) {
+    public Auction create(Auction auction, List<MultipartFile> files) {
         auction.setPerson(authPersonProvider.getAuthenticatedUser());
+
+        if (files != null && !files.isEmpty()) {
+            List<Images> images = files.stream()
+                    .map(this::processImage)
+                    .collect(Collectors.toList());
+            images.forEach(image -> image.setAuction(auction));
+            auction.setImages(images);
+        }
+
         return auctionRepository.save(auction);
     }
 
-    public Auction update(Auction auction) {
+    public Auction update(Auction auction, List<MultipartFile> files) {
         Auction auctionSaved = auctionRepository.findById(auction.getId())
                 .orElseThrow(() -> new NoSuchElementException("Leilão não encontrado"));
+
         auctionSaved.setTitle(auction.getTitle());
         auctionSaved.setDescription(auction.getDescription());
         auctionSaved.setStartDateTime(auction.getStartDateTime());
@@ -35,6 +49,19 @@ public class AuctionService {
         auctionSaved.setStatus(auction.getStatus());
         auctionSaved.setObservation(auction.getObservation());
         auctionSaved.setIncrementValue(auction.getIncrementValue());
+
+        if (files != null && !files.isEmpty()) {
+            if (auctionSaved.getImages() != null) {
+                auctionSaved.getImages().clear();
+            }
+
+            List<Images> images = files.stream()
+                    .map(this::processImage)
+                    .collect(Collectors.toList());
+            images.forEach(image -> image.setAuction(auctionSaved));
+            auctionSaved.setImages(images);
+        }
+
         return auctionRepository.save(auctionSaved);
     }
 
@@ -60,5 +87,17 @@ public class AuctionService {
             throw new NoSuchElementException("Leilão não encontrado ou não pertence ao usuário autenticado");
         }
         return auction;
+    }
+
+    private Images processImage(MultipartFile file) {
+        Images image = new Images();
+        image.setFileName(file.getOriginalFilename());
+        image.setFileType(file.getContentType());
+        try {
+            image.setData(file.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao processar imagem", e);
+        }
+        return image;
     }
 }
