@@ -28,7 +28,7 @@ const Login = () => {
             navigate("/");
         }catch(err){
             console.log(err);
-            alert("Usuário ou senha incorretos");
+            alert("Usuário ou senha incorretos. Ou verifique seu email para ativar a conta.");
         }
         
     }

@@ -17,7 +17,7 @@ import com.leilao.backend.model.Auction;
 import com.leilao.backend.service.AuctionService;
 
 @RestController
-@RequestMapping("/api/auction")
+@RequestMapping("/api/auctions")
 @CrossOrigin
 public class AuctionController {
 

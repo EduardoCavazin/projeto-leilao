@@ -3,9 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRouter = () => {
     
-    const isAutennicated = localStorage.getItem('token')? true : false;
+    const isAuthenticated = localStorage.getItem('token')? true : false;
 
-    return(isAutennicated?<Outlet/>:<Navigate to="/401"/>);
+    return(isAuthenticated?<Outlet/>:<Navigate to="/401"/>);
 
 }
 

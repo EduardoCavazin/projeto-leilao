@@ -14,6 +14,8 @@ import ConfirmAccount from './pages/confirmAccount/ConfirmAccount';
 import Unauthorized from './pages/unauthorized/Unauthorized';
 import NotFound from './pages/notFound/NotFound';
 import Category from './pages/category/Category';
+import AuctionForm from './pages/auctionForm/AuctionForm';
+import AuctionList from './pages/auctionList/AuctionList';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="/profile" element={<DefaultLayout><Profile /></DefaultLayout>} />
             <Route path="/admin" element={<DefaultLayout><AdminHome /></DefaultLayout>} />
             <Route path="/category" element={<DefaultLayout><Category /></DefaultLayout>} />
+            <Route path="/auctions" element={<DefaultLayout><AuctionList /></DefaultLayout>} />
+            <Route path="/auctions/new" element={<DefaultLayout><AuctionForm /></DefaultLayout>} />
           </Route>
 
           <Route path='/login' element={<SimpleLayout><Login /></SimpleLayout>} />

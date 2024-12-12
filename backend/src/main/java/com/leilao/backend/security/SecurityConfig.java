@@ -47,9 +47,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/person/**").permitAll()
                         .requestMatchers("/api/category").permitAll()
-                        .requestMatchers("/api/auction/public").permitAll()
+                        .requestMatchers("/api/auctions/**").permitAll()
                         .requestMatchers("/ws/**").permitAll()
-                        /* .requestMatchers("/api/category/**").hasRole("ADMIN") */
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
